@@ -38,22 +38,43 @@
 # for item in items:
 #     print(item.text)
 
+# from bs4 import BeautifulSoup
+#
+# html_doc = '''
+# <html>
+#     <head>
+#     </head>
+#     <body>
+#         <div class="container">
+#             <h1>Title</h1>
+#             <p>Paragraph content</p>
+#         </div>
+#     </body>
+# </html>
+# '''
+#
+# soup = BeautifulSoup(html_doc, 'html.parser')
+#
+# container = soup.find('div', class_='container')
+# print('Parent tag:', container.parent.name)
+
 from bs4 import BeautifulSoup
 
 html_doc = '''
 <html>
-    <head>
-    </head>
-    <body>
-        <div class="container">
-            <h1>Title</h1>
-            <p>Paragraph content</p>
-        </div>
-    </body>
+<head>
+</head>
+<body>
+    <div id="main">
+        <p class="info">Info Paragraph 1</p>
+        <p class="info">Info Paragraph 2</p>
+    </div>
+</body>
 </html>
 '''
 
 soup = BeautifulSoup(html_doc, 'html.parser')
 
-container = soup.find('div', class_='container')
-print('Parent tag:', container.parent.name)
+elements = soup.select('div#main p.info')
+for element in elements:
+    print(element.get_text())
